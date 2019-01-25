@@ -428,10 +428,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
         Dim varOrdFecha As String
         Dim varCiclo As Integer
         Dim varPorce As Double
+        Dim varAcumuladoNetoDifCambioIBI, varDifCambioIB, varDifCambioIBII, varAcumuladoPesosOrigDifCambio As Double
         Dim varAcumulado, varAcuNeto, varAcuRetenido, varAcuIva, varAcuAnticipo, varAcuBruto, varAcumulaUs As Double
         Dim varProveedor, varLetra As String
         Dim varNeto, varIva, varIva5, varIva27, varIva105, varIb, varExento, varTotalTrabajo As Double
-        Dim varRetIb, varRetIva, varRetGan
+        Dim varRetIb, varRetIva, varRetGan As Double
         REM Dim varRetIb, varRetIva, varRetGan, varAcumulaIb, varRete As Double
         Dim varPorceIb, varPorceIbCaba As Double
         Dim varTipoIbCaba, varTipoIva, varTipoPrv, varTipoIb As Integer
@@ -479,6 +480,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
             varProveedor = GRilla.Item(0, varCiclo).Value
 
             If Trim(varProveedor) <> "" Then
+
+                Dim DifCambioIbI As Double = 0.0
+                Dim DifCambioIbII As Double = 0.0
+                Dim AcumPesosOrigII As Double = 0.0
+                Dim WVieneDePesos As Boolean = False
 
                 varAcumulado = 0
                 varAcumulaIva = 0
@@ -677,9 +683,12 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
                             Exit Sub
                         End Try
 
+                        Dim varAcuNetoOrig = 0
+
                         If Not IsNothing(CampoAcumulado) Then
 
                             varAcuNeto = CampoAcumulado("Neto")
+                            varAcuNetoOrig = CampoAcumulado("Neto")
                             varAcuRetenido = CampoAcumulado("Retenido")
                             varAcuAnticipo = CampoAcumulado("Anticipo")
                             varAcuBruto = CampoAcumulado("Bruto")
@@ -719,8 +728,11 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                         varRetIb = varRetIbI + varRetIbII + varRetIva
 
-                        varPesosOrig = varParidad * varSaldoUs
-                        varDifCambio = 0
+                        If varParidad <> 0 Then
+                            varPesosOrig = varParidad * varSaldoUs
+                        Else
+                            varPesosOrig = varSaldo
+                        End If
 
                         varAcuNeto = (varAcumulado - varRetIb - varRetGan)
 
@@ -728,17 +740,91 @@ Public Class ListadoCuentaCorrienteProveedoresSelectivoPrueba
 
                             If compra.Item("MarcaDifCambio") = 0 Then
 
-                                varDifCambio = varSaldo - varPesosOrig
+                                'varDifCambio = varSaldo - varPesosOrig
+
+                                If varTotalTrabajo <> 0 Then
+                                    varAcumulaNetoII = varNeto * varPorce
+                                Else
+                                    If varTipoIva = 2 Then
+                                        varAcumulaNetoII = (varSaldo / 1.21)
+                                    Else
+                                        varAcumulaNetoII = varSaldo
+                                    End If
+                                End If
+
+                                If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
+                                    DifCambioIbII = CaculoRetencionIngresosBrutos(varTipoIb, varPorceIb, varAcumulaNetoII)
+                                End If
+
+                                If varEmpresa = 1 And (compra Is Nothing OrElse compra.Item("Rechazado") <> 1) Then
+
+                                    If Val(varPorceIbCaba) <> 0 And Val(varTipoIbCaba) <> 2 Then
+                                        Dim DifCambioIbIII = CaculoRetencionIngresosBrutosCaba(varTipoIbCaba, varPorceIbCaba, varAcumulaNetoII)
+                                        DifCambioIbII += DifCambioIbIII
+
+                                    End If
+
+                                End If
+
+                                If compra Is Nothing OrElse compra.Item("Rechazado") <> 1 Then
+                                    Dim varAcumulaNetoIII = varAcumulaNetoII
+                                    If varPago = 2 Then
+                                        varAcumulaNetoIII = varAcumulaNetoII + (varDife / 1.21)
+                                    End If
+
+                                    Dim DifCambioIbIV = CaculoRetencionGanancia(varTipoPrv, varAcumulaNetoIII, (varAcumuladoPesosOrigDifCambio - AcumDifCambio - varAcumuladoNetoDifCambioIBI - DifCambioIbII), varAcuRetenido, varAcuAnticipo, varAcuBruto, varAcuIva)
+                                    DifCambioIbII += DifCambioIbIV
+                                End If
+
+                                DifCambioIbI += DifCambioIbII
+
+                                varAcumuladoNetoDifCambioIBI = DifCambioIbI
+
+                                varAcumuladoPesosOrigDifCambio += varPesosOrig
+
+                                If WVieneDePesos Then
+                                    varDifCambio = varAcuNeto - (AcumPesosOrig + AcumDifCambio + varPesosOrig - DifCambioIbII)
+                                    AcumPesosOrig += (varPesosOrig - DifCambioIbII)
+                                Else
+                                    AcumPesosOrig = varAcumuladoPesosOrigDifCambio - varAcumuladoNetoDifCambioIBI
+
+                                    varDifCambio = varAcuNeto - AcumPesosOrig - varDifCambio
+                                End If
 
                                 AcumDifCambio += varDifCambio
-
+                                WVieneDePesos = False
+                            Else
+                                AcumPesosOrig = varAcumuladoPesosOrigDifCambio - varAcumuladoNetoDifCambioIBI
                             End If
 
-                            AcumPesosOrig = IIf(varDifCambio >= 0, (varAcuNeto - AcumDifCambio), varAcuNeto)
-
                         Else
-                            AcumPesosOrig = varAcuNeto
+                            'varDifCambio = 0
+                            AcumPesosOrig = varAcuNeto - AcumDifCambio
+                            varAcumuladoPesosOrigDifCambio += varPesosOrig
+                            WVieneDePesos = True
                         End If
+
+                        'varPesosOrig = varParidad * varSaldoUs
+                        'varDifCambio = 0
+
+                        'varAcuNeto = (varAcumulado - varRetIb - varRetGan)
+
+                        'If varParidad <> 0 Then
+
+                        '    If compra.Item("MarcaDifCambio") = 0 Then
+
+                        '        varDifCambio = varSaldo - varPesosOrig
+
+                        '        AcumDifCambio += varDifCambio
+
+                        '    End If
+
+                        '    'AcumPesosOrig = IIf(varDifCambio >= 0, (varAcuNeto - AcumDifCambio), varAcuNeto)
+                        '    AcumPesosOrig = varAcuNeto - AcumDifCambio
+
+                        'Else
+                        '    AcumPesosOrig = varAcuNeto
+                        'End If
 
                         Try
                             SQLConnector.executeProcedure("alta_impCtaCtePrvNetII", CCPrv.Clave, CCPrv.Proveedor, CCPrv.Tipo, CCPrv.letra, CCPrv.punto, CCPrv.numero, varTotal, varSaldo, CCPrv.fecha, CCPrv.vencimiento, CCPrv.VencimientoII, CCPrv.Impre, CCPrv.nroInterno, txtEmpresa, varAcumulado, WOrden, txtFechaEmision.Text, "", "", "", varParidadTotal, varSaldoOriginal, varDife, 0, 0, "", varRetIb, varRetGan, varAcuNeto, varParidad, varTotalUs, varSaldoUs, varAcumulaUs, varPago, varPesosOrig, varDifCambio, AcumDifCambio, AcumPesosOrig)

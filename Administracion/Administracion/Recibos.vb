@@ -1051,6 +1051,12 @@ Public Class Recibos
                     End If
 
                 End If
+
+                If Not IsNothing(.Cells(0).Value) AndAlso Val(.Cells(0).Value) = 3 Then
+                    MsgBox("No se puede informar 'Documentos' como Forma de Pago.", MsgBoxStyle.Exclamation)
+                    Exit Sub
+                End If
+
             End With
 
         Next
@@ -2929,7 +2935,7 @@ Public Class Recibos
                             End If
                         Else
                             valor = valor.ToString().Substring(valor.ToString.Length - 1, 1)
-                            If valor = "1" Or valor = "2" Or valor = "3" Or valor = "4" Then
+                            If valor = "1" Or valor = "2" Or valor = "4" Then 'Or valor = "3" Or valor = "4" Then
                                 eventoSegunTipoEnFormaDePagoPara(CustomConvert.toIntOrZero(valor), iRow, iCol)
                             Else ' Sólo se aceptan los valores 1 (Efectivo) , 2 (Cheque), 3 (Doc) y 4 (Varios) ?
                                 gridFormasPago2.CurrentCell = gridFormasPago2.Rows(iRow).Cells(iCol)

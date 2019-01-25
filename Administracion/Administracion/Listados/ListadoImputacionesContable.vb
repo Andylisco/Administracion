@@ -1059,7 +1059,7 @@ Public Class ListadoImputacionesContable
     Private Function _BuscarRetencionesIBRecibos(ByVal WDesde As String, ByVal WHasta As String) As DataTable
 
         Dim cn = New SqlConnection()
-        Dim cm = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
+        Dim cm = New SqlCommand("SELECT Recibo, Fecha, RetIb1, RetIb2, RetIb3, RetIb4, RetIb5, RetIb6, RetIb7, RetIb8, RetIb9, RetIb10, RetIb11, RetIb12, RetIb13, RetIb14 FROM Recibos WHERE (Renglon = '01' OR Renglon = '1') AND FechaOrd BETWEEN '" & WDesde & "' AND '" & WHasta & "'")
         Dim dr As SqlDataReader
         Dim tabla As New DataTable
 

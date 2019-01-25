@@ -442,6 +442,9 @@ Public Class Pagos
 
 
         mostrarProveedor(orden.proveedor)
+
+        _TraerDatosRetenciones()
+
         mostrarBanco(orden.banco)
         mostrarTipo(orden.tipo)
         mostrarPagos(orden.pagos)
@@ -453,6 +456,49 @@ Public Class Pagos
         WCertificadoIVA = orden.certIVA
 
         sumarImportes()
+    End Sub
+
+    Private Sub _TraerDatosRetenciones()
+
+        Dim cn As SqlConnection = New SqlConnection()
+        Dim cm As SqlCommand = New SqlCommand("SELECT TipoProv, TipoIva, TipoIb, TipoIbCaba, PorceIb, PorceIbCaba, RetencionesRegistradas FROM Pagos WHERE Orden = '" & txtOrdenPago.Text & "' And Renglon in ('1', '01')")
+        Dim dr As SqlDataReader
+
+        Try
+
+            cn.ConnectionString = Proceso._ConectarA
+            cn.Open()
+            cm.Connection = cn
+
+            dr = cm.ExecuteReader()
+
+            If dr.HasRows Then
+                dr.Read()
+
+                Dim WRetencionesReg = IIf(IsDBNull(dr.Item("RetencionesRegistradas")), 0, dr.Item("RetencionesRegistradas"))
+
+                If Val(WRetencionesReg) = 1 Then
+                    WTipoProv = IIf(IsDBNull(dr.Item("TipoProv")), 0, dr.Item("TipoProv"))
+                    WTipoIva = IIf(IsDBNull(dr.Item("TipoIva")), 0, dr.Item("TipoIva"))
+                    WTipoIb = IIf(IsDBNull(dr.Item("TipoIb")), 0, dr.Item("TipoIb"))
+                    WTipoIbCaba = IIf(IsDBNull(dr.Item("TipoIbCaba")), 0, dr.Item("TipoIbCaba"))
+                    WPorceIb = IIf(IsDBNull(dr.Item("PorceIb")), 0, dr.Item("PorceIb"))
+                    WPorceIbCaba = IIf(IsDBNull(dr.Item("PorceIbCaba")), 0, dr.Item("PorceIbCaba"))
+                End If
+
+            End If
+
+        Catch ex As Exception
+            Throw New Exception("Hubo un problema al querer consultar la Base de Datos." & vbCrLf & vbCrLf & "Motivo: " & ex.Message)
+        Finally
+
+            dr = Nothing
+            cn.Close()
+            cn = Nothing
+            cm = Nothing
+
+        End Try
+
     End Sub
 
     Private Sub mostrarTipo(ByVal tipo As Integer)
@@ -696,6 +742,7 @@ Public Class Pagos
                 Exit Sub
             End If
 
+            txtNombreBanco.Text = ""
             Dim banco As Banco = DAOBanco.buscarBancoPorCodigo(txtBanco.Text)
             If Not IsNothing(banco) Then
                 mostrarBanco(banco)
@@ -1449,7 +1496,7 @@ Public Class Pagos
 
                     End If
 
-                    If WMarcaDifCambio = 1 Then
+                    If WMarcaCHR = 1 Then
                         ckNoCalcRetenciones.Checked = True
                         ckNoCalcRetenciones_CheckedChanged(Nothing, Nothing)
                     End If
@@ -2782,7 +2829,14 @@ Public Class Pagos
         ZSql &= " CertificadoGan = " & "" & Val(WCertificadoGan) & ","
         ZSql &= " CertificadoIb = " & "" & Val(WCertificadoIb) & ","
         ZSql &= " CertificadoIbCiudad = " & "" & Val(WCertificadoIbCiudad) & ","
-        ZSql &= " CertificadoIva = " & "" & Val(WCertificadoIVA) & ""
+        ZSql &= " CertificadoIva = " & "" & Val(WCertificadoIVA) & ","
+        ZSql &= " TipoProv = " & "" & Val(WTipoProv) & ","
+        ZSql &= " TipoIva = " & "" & Val(WTipoIva) & ","
+        ZSql &= " TipoIb = " & "" & Val(WTipoIb) & ","
+        ZSql &= " TipoIbCaba = " & "" & Val(WTipoIbCaba) & ","
+        ZSql &= " PorceIb = " & "'" & formatonumerico(WPorceIb) & "',"
+        ZSql &= " PorceIbCaba = " & "'" & formatonumerico(WPorceIbCaba) & "',"
+        ZSql &= " RetencionesRegistradas = " & "'" & "1" & "'"
         ZSql &= " Where Orden = " & "'" & txtOrdenPago.Text & "'"
 
         Try
@@ -4492,13 +4546,13 @@ Public Class Pagos
     Private Sub txtObservaciones_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtObservaciones.KeyDown
 
         If e.KeyData = Keys.Enter Then
-            If Not optVarios.Checked Then
+            If optVarios.Checked Or optTransferencias.Checked Then
+                txtBanco.Focus()
+            Else
                 With gridPagos
                     .CurrentCell = .Rows(0).Cells(4)
                     .Focus()
                 End With
-            Else
-                txtBanco.Focus()
             End If
         ElseIf e.KeyData = Keys.Escape Then
             txtObservaciones.Text = ""
@@ -5052,7 +5106,7 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteRetIva
-        Dim WTipoIbCaba, WTipoiva, WTipoprv
+        'Dim WTipoIbCaba, WTipoiva, WTipoprv
         Dim WEmpNombre = "SURFACTAN S.A."
         Dim WEmpDireccion = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
@@ -5093,9 +5147,9 @@ Public Class Pagos
                     WPrvDireccion = .Item("Direccion")
                     WPrvCuit = .Item("Cuit")
                     WPrvIb = .Item("NroIb")
-                    WTipoIbCaba = .Item("CodIbCaba")
-                    WTipoiva = Val(.Item("Iva"))
-                    WTipoprv = Val(.Item("Tipo")) + 1
+                    'WTipoIbCaba = .Item("CodIbCaba")
+                    'WTipoiva = Val(.Item("Iva"))
+                    'WTipoprv = Val(.Item("Tipo")) + 1
 
                 End If
             End With
@@ -5107,7 +5161,7 @@ Public Class Pagos
             cn.Close()
 
         End Try
-
+        
         ImpreCopia(1) = "Original"
         ImpreCopia(2) = "Duplicado"
 
@@ -5372,7 +5426,7 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIBCABA
-        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        'Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
         Dim WEmpNombre = "SURFACTAN S.A."
         Dim WEmpDireccion = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
@@ -5412,12 +5466,12 @@ Public Class Pagos
                     WPrvDireccion = .Item("Direccion")
                     WPrvCuit = .Item("Cuit")
                     WPrvIb = .Item("NroIb")
-                    WTipoIb = .Item("CodIb")
-                    WTipoIbCaba = .Item("CodIbCaba")
-                    WTipoiva = Val(.Item("Iva"))
-                    WTipoprv = Val(.Item("Tipo")) + 1
-                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
-                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+                    'WTipoIb = .Item("CodIb")
+                    'WTipoIbCaba = .Item("CodIbCaba")
+                    'WTipoiva = Val(.Item("Iva"))
+                    'WTipoprv = Val(.Item("Tipo")) + 1
+                    'WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    'WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
 
                 End If
             End With
@@ -5532,7 +5586,7 @@ Public Class Pagos
 
                 WImpre4 = Val(.Cells(4).Value)
 
-                If WTipoiva = 2 Then
+                If WTipoIva = 2 Then
                     WImpre4 = WImpre4 / 1.21
                 End If
 
@@ -5709,7 +5763,7 @@ Public Class Pagos
         Dim Tabla As New DataTable("Detalles")
         Dim row As DataRow
         Dim crdoc As ReportDocument = New OrdenPagoComprobanteIB
-        Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
+        'Dim WTipoIb, WTipoIbCaba, WTipoiva, WTipoprv, WPorceIb, WPorceIbCaba As String
         Dim WEmpNombre = "SURFACTAN S.A."
         Dim WEmpDireccion = "Malvinas Argentinas 4589"
         Dim WEmpLocalidad = "1644 Victoria Bs.As. Argentina"
@@ -5749,12 +5803,12 @@ Public Class Pagos
                     WPrvDireccion = .Item("Direccion")
                     WPrvCuit = .Item("Cuit")
                     WPrvIb = .Item("NroIb")
-                    WTipoIb = .Item("CodIb")
-                    WTipoIbCaba = .Item("CodIbCaba")
-                    WTipoiva = Val(.Item("Iva"))
-                    WTipoprv = Val(.Item("Tipo")) + 1
-                    WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
-                    WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
+                    'WTipoIb = .Item("CodIb")
+                    'WTipoIbCaba = .Item("CodIbCaba")
+                    'WTipoiva = Val(.Item("Iva"))
+                    'WTipoprv = Val(.Item("Tipo")) + 1
+                    'WPorceIb = IIf(IsDBNull(.Item("PorceIb")), "0", .Item("PorceIb"))
+                    'WPorceIbCaba = IIf(IsDBNull(.Item("PorceIbCaba")), "0", .Item("PorceIbCaba"))
 
                 End If
             End With
