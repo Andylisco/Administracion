@@ -11,7 +11,7 @@ Public Class VistaPrevia
 
         With Me.CrystalReportViewer1
             .ReportSource = Me.Reporte
-            .Refresh()
+            '.Refresh()
         End With
 
     End Sub
@@ -19,7 +19,7 @@ Public Class VistaPrevia
     Public Sub EstablecerConexion(ByVal Servidor As String, ByVal BaseDatos As String)
         With Me.Reporte
             .DataSourceConnections.Item(0).SetConnection(Trim(Servidor), Trim(BaseDatos), False)
-            .Refresh()
+            '.Refresh()
         End With
     End Sub
 
@@ -84,7 +84,7 @@ Public Class VistaPrevia
 
             End If
 
-            .RefreshReport()
+            '.RefreshReport()
 
         End With
 
@@ -98,7 +98,7 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.PrintToPrinter(cant, True, 0, 0)
     End Sub
 
@@ -112,12 +112,15 @@ Public Class VistaPrevia
         _ReconectarBaseDatos()
 
         Me.Reporte.RecordSelectionFormula = IIf(IsNothing(Me.Formula), "", Me.Formula)
-        Me.Reporte.Refresh()
+        'Me.Reporte.Refresh()
         Me.Reporte.ExportToDisk(ExportFormatType.PortableDocFormat, ruta & NombreArchivo)
     End Sub
 
     Public Sub DesdeArchivo(ByVal s As String)
         Reporte = New ReportDocument
         Reporte.Load(s)
+
+        _ReconectarBaseDatos()
+
     End Sub
 End Class

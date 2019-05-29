@@ -197,7 +197,7 @@ Public Class Login
                 Next
         End Select
 
-        For Each d As String In ("ebiglieri@surfactan.com.ar; isocalidad@surfactan.com.ar; calidad@surfactan.com.ar; calidad2@surfactan.com.ar; wbarosio@surfactan.com.ar; wbarosio@gmail.com; lsantos@surfactan.com.ar; juanfs@surfactan.com.ar").Split(";")
+        For Each d As String In ("ebiglieri@surfactan.com.ar; calidad2@surfactan.com.ar; calidad@surfactan.com.ar; isocalidad@surfactan.com.ar; wbarosio@surfactan.com.ar; wbarosio@gmail.com; lsantos@surfactan.com.ar; juanfs@surfactan.com.ar").Split(";")
             If Not WDirecciones.Contains(Trim(d)) Then WDirecciones &= Trim(d) & ";"
         Next
 
