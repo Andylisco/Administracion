@@ -220,6 +220,12 @@
     <Compile Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\AyudaTiposINC.Designer.vb">
+      <DependentUpon>AyudaTiposINC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\AyudaTiposINC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\Maestros\Incidencias\Tipos de INC\ListadoTiposINC.Designer.vb">
       <DependentUpon>ListadoTiposINC.vb</DependentUpon>
     </Compile>
@@ -299,6 +305,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helper.vb" />
+    <Compile Include="Interfaces\IAyudaTipoINC.vb" />
     <Compile Include="Interfaces\IExportarINC.vb" />
     <Compile Include="Interfaces\IModifNumeracionINC.vb" />
     <Compile Include="Interfaces\INuevoTipoINC.vb" />
@@ -494,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\SeleccionTipoIncidencia.resx">
       <DependentUpon>SeleccionTipoIncidencia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Maestros\Incidencias\Tipos de INC\AyudaTiposINC.resx">
+      <DependentUpon>AyudaTiposINC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Maestros\Incidencias\Tipos de INC\ListadoTiposINC.resx">
       <DependentUpon>ListadoTiposINC.vb</DependentUpon>

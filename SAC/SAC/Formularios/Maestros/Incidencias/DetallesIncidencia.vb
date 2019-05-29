@@ -6,7 +6,7 @@ Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
 
-Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IExportarINC, IModifNumeracionINC, IIngresoClaveSeguridad
+Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListadoSACs, IExportarINC, IModifNumeracionINC, IIngresoClaveSeguridad, IAyudaTipoINC
 
     Const TextoBtnGenerarSac = "Asociar SAC"
     Const TextoBtnVerSac = "Ver SAC Asociado"
@@ -29,7 +29,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
     End Sub
 
     Private Sub DetallesIncidencia_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
-        txtIncidencia.Focus()
+        txtAnio.Focus()
     End Sub
 
     Private Sub DetallesIncidencia_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -51,7 +51,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             c.Enabled = True
         Next
 
-        For Each c As Control In {txtDescProducto, txtFecha, txtIncidencia, txtLotePartida, txtPosiblesUsos, txtProducto, txtReferencia, txtTitulo, txtMotivos}
+        For Each c As Control In {txtDescProducto, txtFecha, txtIncidencia, txtLotePartida, txtPosiblesUsos, txtProducto, txtReferencia, txtTitulo, txtMotivos, txtTipo, txtNumero, txtDescTipo}
             c.Text = ""
         Next
 
@@ -152,6 +152,12 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                         End If
 
                         txtFecha.Text = OrDefault(.Item("Fecha"), "")
+                        txtTipo.Text = OrDefault(.Item("TipoInc"), "")
+
+                        txtTipo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+                        txtAnio.Text = OrDefault(.Item("Ano"), "")
+                        txtNumero.Text = OrDefault(.Item("Numero"), "")
 
                         Dim WTempEstado = OrDefault(.Item("Estado"), 0)
 
@@ -606,7 +612,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtIncidencia.KeyPress
+    Private Sub SoloNumero(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtIncidencia.KeyPress, txtTipo.KeyPress, txtAnio.KeyPress, txtNumero.KeyPress
         If Not Char.IsNumber(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
@@ -1118,6 +1124,89 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         End If
 
         btnEliminar.PerformClick()
+
+    End Sub
+
+    Private Sub txtTipo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTipo.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            txtDescTipo.Text = ""
+
+            If Trim(txtTipo.Text) = "" Then
+                '
+                ' Abrimos la ayuda de selección de tipos.
+                '
+                With New AyudaTiposINC
+                    .Show(Me)
+                End With
+
+                Exit Sub
+            End If
+
+            Dim WTipo As DataRow = GetSingle("SELECT Tipo, Descripcion FROM TiposINC WHERE Tipo = '" & txtTipo.Text & "'")
+
+            If WTipo IsNot Nothing Then
+
+                txtDescTipo.Text = Trim(OrDefault(WTipo.Item("Descripcion"), ""))
+
+                txtNumero.Focus()
+
+            End If
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtTipo.Text = ""
+        End If
+
+    End Sub
+
+    Public Sub _ProcesarAyudaTipoINC(ByVal Tipo As Integer, ByVal Descripcion As String) Implements IAyudaTipoINC._ProcesarAyudaTipoINC
+        txtTipo.Text = Tipo
+        txtTipo_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+        txtNumero.Focus()
+    End Sub
+
+    Private Sub txtTipo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTipo.MouseDoubleClick
+        With New AyudaTiposINC
+            .ShowDialog(Me)
+        End With
+    End Sub
+
+    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+            If Trim(txtAnio.Text) = "" Then txtAnio.Text = Date.Now.ToString("yyyyy")
+
+            txtTipo.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtAnio.Text = ""
+        End If
+
+    End Sub
+
+    Private Sub txtNumero_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero.KeyDown
+
+        If e.KeyData = Keys.Enter Then
+
+            If Val(txtNumero.Text) <> 0 Then
+
+                Dim WInc As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE TipoInc = '" & txtTipo.Text & "' AND Numero = '" & txtNumero.Text & "' And Tipo <> '2'")
+
+                If WInc IsNot Nothing Then
+                    txtIncidencia.Text = WInc.Item("Incidencia")
+
+                    txtIncidencia_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))
+
+                End If
+
+            End If
+
+            txtFecha.Focus()
+
+        ElseIf e.KeyData = Keys.Escape Then
+            txtNumero.Text = ""
+        End If
 
     End Sub
 End Class
