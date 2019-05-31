@@ -42,15 +42,22 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.txtProducto = New System.Windows.Forms.MaskedTextBox()
         Me.txtCantidadMP = New System.Windows.Forms.TextBox()
         Me.txtDescMP = New System.Windows.Forms.TextBox()
+        Me.txtDescTipo = New System.Windows.Forms.TextBox()
         Me.txtDescProv = New System.Windows.Forms.TextBox()
+        Me.txtNumero = New System.Windows.Forms.TextBox()
+        Me.txtTipo = New System.Windows.Forms.TextBox()
+        Me.txtAnio = New System.Windows.Forms.TextBox()
         Me.txtIncidencia = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtTitulo = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -151,29 +158,36 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.GroupBox1.Controls.Add(Me.txtProducto)
         Me.GroupBox1.Controls.Add(Me.txtCantidadMP)
         Me.GroupBox1.Controls.Add(Me.txtDescMP)
+        Me.GroupBox1.Controls.Add(Me.txtDescTipo)
         Me.GroupBox1.Controls.Add(Me.txtDescProv)
+        Me.GroupBox1.Controls.Add(Me.txtNumero)
+        Me.GroupBox1.Controls.Add(Me.txtTipo)
+        Me.GroupBox1.Controls.Add(Me.txtAnio)
         Me.GroupBox1.Controls.Add(Me.txtIncidencia)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtTitulo)
         Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Label13)
         Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.Label16)
         Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 61)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 60)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(845, 150)
+        Me.GroupBox1.Size = New System.Drawing.Size(845, 185)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "DATOS GENERALES"
         '
         'btnDesvincularSAC
         '
-        Me.btnDesvincularSAC.Location = New System.Drawing.Point(733, 43)
+        Me.btnDesvincularSAC.Location = New System.Drawing.Point(733, 42)
         Me.btnDesvincularSAC.Name = "btnDesvincularSAC"
         Me.btnDesvincularSAC.Size = New System.Drawing.Size(106, 22)
         Me.btnDesvincularSAC.TabIndex = 10
@@ -182,7 +196,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnMPAsociadasOC
         '
-        Me.btnMPAsociadasOC.Location = New System.Drawing.Point(607, 44)
+        Me.btnMPAsociadasOC.Location = New System.Drawing.Point(607, 43)
         Me.btnMPAsociadasOC.Name = "btnMPAsociadasOC"
         Me.btnMPAsociadasOC.Size = New System.Drawing.Size(120, 22)
         Me.btnMPAsociadasOC.TabIndex = 10
@@ -191,7 +205,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(733, 17)
+        Me.Button3.Location = New System.Drawing.Point(733, 16)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(106, 22)
         Me.Button3.TabIndex = 10
@@ -200,7 +214,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnSac
         '
-        Me.btnSac.Location = New System.Drawing.Point(607, 17)
+        Me.btnSac.Location = New System.Drawing.Point(607, 16)
         Me.btnSac.Name = "btnSac"
         Me.btnSac.Size = New System.Drawing.Size(120, 22)
         Me.btnSac.TabIndex = 10
@@ -212,16 +226,16 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.cmbEmpresaIncidencia.DropDownWidth = 200
         Me.cmbEmpresaIncidencia.FormattingEnabled = True
         Me.cmbEmpresaIncidencia.Items.AddRange(New Object() {"", "S I", "P I", "S II", "P II", "S III", "S IV", "S V", "P III", "P V", "S VI", "S VII"})
-        Me.cmbEmpresaIncidencia.Location = New System.Drawing.Point(79, 69)
+        Me.cmbEmpresaIncidencia.Location = New System.Drawing.Point(484, 48)
         Me.cmbEmpresaIncidencia.Name = "cmbEmpresaIncidencia"
-        Me.cmbEmpresaIncidencia.Size = New System.Drawing.Size(63, 21)
+        Me.cmbEmpresaIncidencia.Size = New System.Drawing.Size(103, 21)
         Me.cmbEmpresaIncidencia.TabIndex = 4
         '
         'cmbEmpresa
         '
         Me.cmbEmpresa.DropDownWidth = 200
         Me.cmbEmpresa.FormattingEnabled = True
-        Me.cmbEmpresa.Location = New System.Drawing.Point(507, 18)
+        Me.cmbEmpresa.Location = New System.Drawing.Point(301, 47)
         Me.cmbEmpresa.Name = "cmbEmpresa"
         Me.cmbEmpresa.Size = New System.Drawing.Size(95, 21)
         Me.cmbEmpresa.TabIndex = 4
@@ -231,14 +245,14 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.cmbEstado.DropDownWidth = 200
         Me.cmbEstado.FormattingEnabled = True
         Me.cmbEstado.Items.AddRange(New Object() {"PENDIENTE DE ANÁLISIS", "GENERA SAC", "NO GENERA SAC"})
-        Me.cmbEstado.Location = New System.Drawing.Point(299, 18)
+        Me.cmbEstado.Location = New System.Drawing.Point(80, 47)
         Me.cmbEstado.Name = "cmbEstado"
         Me.cmbEstado.Size = New System.Drawing.Size(135, 21)
         Me.cmbEstado.TabIndex = 3
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(186, 18)
+        Me.txtFecha.Location = New System.Drawing.Point(534, 20)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -249,7 +263,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'txtReferencia
         '
-        Me.txtReferencia.Location = New System.Drawing.Point(79, 121)
+        Me.txtReferencia.Location = New System.Drawing.Point(79, 154)
         Me.txtReferencia.MaxLength = 100
         Me.txtReferencia.Name = "txtReferencia"
         Me.txtReferencia.Size = New System.Drawing.Size(760, 20)
@@ -258,7 +272,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(140, 22)
+        Me.Label8.Location = New System.Drawing.Point(488, 24)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(40, 13)
         Me.Label8.TabIndex = 0
@@ -266,7 +280,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'txtProveedor
         '
-        Me.txtProveedor.Location = New System.Drawing.Point(200, 45)
+        Me.txtProveedor.Location = New System.Drawing.Point(200, 76)
         Me.txtProveedor.Name = "txtProveedor"
         Me.txtProveedor.ReadOnly = True
         Me.txtProveedor.Size = New System.Drawing.Size(101, 20)
@@ -276,7 +290,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'txtOrden
         '
-        Me.txtOrden.Location = New System.Drawing.Point(79, 45)
+        Me.txtOrden.Location = New System.Drawing.Point(79, 76)
         Me.txtOrden.Name = "txtOrden"
         Me.txtOrden.Size = New System.Drawing.Size(53, 20)
         Me.txtOrden.TabIndex = 5
@@ -284,7 +298,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'txtProducto
         '
-        Me.txtProducto.Location = New System.Drawing.Point(207, 70)
+        Me.txtProducto.Location = New System.Drawing.Point(79, 102)
         Me.txtProducto.Mask = ">LL-00000-000"
         Me.txtProducto.Name = "txtProducto"
         Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -297,7 +311,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.txtCantidadMP.BackColor = System.Drawing.Color.Cyan
         Me.txtCantidadMP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidadMP.Location = New System.Drawing.Point(761, 69)
+        Me.txtCantidadMP.Location = New System.Drawing.Point(733, 102)
         Me.txtCantidadMP.Name = "txtCantidadMP"
         Me.txtCantidadMP.Size = New System.Drawing.Size(77, 20)
         Me.txtCantidadMP.TabIndex = 1
@@ -307,35 +321,70 @@ Partial Class DetallesIncidenciaRechazoMP
         'txtDescMP
         '
         Me.txtDescMP.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescMP.Location = New System.Drawing.Point(291, 70)
+        Me.txtDescMP.Location = New System.Drawing.Point(163, 102)
         Me.txtDescMP.Name = "txtDescMP"
         Me.txtDescMP.ReadOnly = True
-        Me.txtDescMP.Size = New System.Drawing.Size(401, 20)
+        Me.txtDescMP.Size = New System.Drawing.Size(497, 20)
         Me.txtDescMP.TabIndex = 1
         Me.txtDescMP.TabStop = False
+        '
+        'txtDescTipo
+        '
+        Me.txtDescTipo.BackColor = System.Drawing.Color.Cyan
+        Me.txtDescTipo.Location = New System.Drawing.Point(211, 20)
+        Me.txtDescTipo.Name = "txtDescTipo"
+        Me.txtDescTipo.ReadOnly = True
+        Me.txtDescTipo.Size = New System.Drawing.Size(161, 20)
+        Me.txtDescTipo.TabIndex = 1
+        Me.txtDescTipo.TabStop = False
         '
         'txtDescProv
         '
         Me.txtDescProv.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescProv.Location = New System.Drawing.Point(307, 45)
+        Me.txtDescProv.Location = New System.Drawing.Point(307, 76)
         Me.txtDescProv.Name = "txtDescProv"
         Me.txtDescProv.ReadOnly = True
-        Me.txtDescProv.Size = New System.Drawing.Size(295, 20)
+        Me.txtDescProv.Size = New System.Drawing.Size(531, 20)
         Me.txtDescProv.TabIndex = 1
         Me.txtDescProv.TabStop = False
         '
+        'txtNumero
+        '
+        Me.txtNumero.Location = New System.Drawing.Point(429, 19)
+        Me.txtNumero.Name = "txtNumero"
+        Me.txtNumero.Size = New System.Drawing.Size(53, 20)
+        Me.txtNumero.TabIndex = 1
+        Me.txtNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTipo
+        '
+        Me.txtTipo.Enabled = False
+        Me.txtTipo.Location = New System.Drawing.Point(174, 19)
+        Me.txtTipo.Name = "txtTipo"
+        Me.txtTipo.Size = New System.Drawing.Size(31, 20)
+        Me.txtTipo.TabIndex = 1
+        Me.txtTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtAnio
+        '
+        Me.txtAnio.Location = New System.Drawing.Point(79, 19)
+        Me.txtAnio.Name = "txtAnio"
+        Me.txtAnio.Size = New System.Drawing.Size(53, 20)
+        Me.txtAnio.TabIndex = 1
+        Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtIncidencia
         '
-        Me.txtIncidencia.Location = New System.Drawing.Point(79, 18)
+        Me.txtIncidencia.Location = New System.Drawing.Point(816, 105)
         Me.txtIncidencia.Name = "txtIncidencia"
-        Me.txtIncidencia.Size = New System.Drawing.Size(53, 20)
+        Me.txtIncidencia.Size = New System.Drawing.Size(12, 20)
         Me.txtIncidencia.TabIndex = 1
         Me.txtIncidencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(11, 73)
+        Me.Label14.Location = New System.Drawing.Point(416, 52)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(62, 13)
         Me.Label14.TabIndex = 0
@@ -343,7 +392,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'txtTitulo
         '
-        Me.txtTitulo.Location = New System.Drawing.Point(79, 96)
+        Me.txtTitulo.Location = New System.Drawing.Point(79, 129)
         Me.txtTitulo.MaxLength = 100
         Me.txtTitulo.Name = "txtTitulo"
         Me.txtTitulo.Size = New System.Drawing.Size(760, 20)
@@ -352,7 +401,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(438, 22)
+        Me.Label12.Location = New System.Drawing.Point(232, 51)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(69, 13)
         Me.Label12.TabIndex = 0
@@ -361,7 +410,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(703, 73)
+        Me.Label13.Location = New System.Drawing.Point(675, 106)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(52, 13)
         Me.Label13.TabIndex = 0
@@ -370,34 +419,61 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(148, 74)
+        Me.Label6.Location = New System.Drawing.Point(20, 106)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(53, 13)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Producto:"
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(378, 23)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(47, 13)
+        Me.Label17.TabIndex = 0
+        Me.Label17.Text = "Número:"
+        '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(138, 49)
+        Me.Label11.Location = New System.Drawing.Point(138, 80)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(59, 13)
         Me.Label11.TabIndex = 0
         Me.Label11.Text = "Proveedor:"
         '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(137, 23)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(31, 13)
+        Me.Label16.TabIndex = 0
+        Me.Label16.Text = "Tipo:"
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(258, 22)
+        Me.Label9.Location = New System.Drawing.Point(28, 52)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(43, 13)
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Estado:"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(42, 23)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(29, 13)
+        Me.Label15.TabIndex = 0
+        Me.Label15.Text = "Año:"
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(34, 49)
+        Me.Label10.Location = New System.Drawing.Point(34, 80)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(39, 13)
         Me.Label10.TabIndex = 0
@@ -406,16 +482,17 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(28, 22)
+        Me.Label5.Location = New System.Drawing.Point(765, 109)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(45, 13)
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Inf. Nro:"
+        Me.Label5.Visible = False
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(11, 125)
+        Me.Label4.Location = New System.Drawing.Point(11, 158)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(62, 13)
         Me.Label4.TabIndex = 0
@@ -424,7 +501,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(35, 100)
+        Me.Label3.Location = New System.Drawing.Point(35, 133)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(38, 13)
         Me.Label3.TabIndex = 0
@@ -506,7 +583,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnMovimientos
         '
-        Me.btnMovimientos.Location = New System.Drawing.Point(670, 483)
+        Me.btnMovimientos.Location = New System.Drawing.Point(670, 514)
         Me.btnMovimientos.Name = "btnMovimientos"
         Me.btnMovimientos.Size = New System.Drawing.Size(120, 41)
         Me.btnMovimientos.TabIndex = 1
@@ -516,7 +593,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnHojaProduccion
         '
-        Me.btnHojaProduccion.Location = New System.Drawing.Point(673, 483)
+        Me.btnHojaProduccion.Location = New System.Drawing.Point(673, 514)
         Me.btnHojaProduccion.Name = "btnHojaProduccion"
         Me.btnHojaProduccion.Size = New System.Drawing.Size(115, 41)
         Me.btnHojaProduccion.TabIndex = 1
@@ -526,7 +603,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnControles
         '
-        Me.btnControles.Location = New System.Drawing.Point(673, 483)
+        Me.btnControles.Location = New System.Drawing.Point(673, 514)
         Me.btnControles.Name = "btnControles"
         Me.btnControles.Size = New System.Drawing.Size(115, 41)
         Me.btnControles.TabIndex = 1
@@ -536,7 +613,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(566, 481)
+        Me.btnCerrar.Location = New System.Drawing.Point(566, 516)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(107, 41)
         Me.btnCerrar.TabIndex = 12
@@ -545,7 +622,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(197, 481)
+        Me.btnGrabar.Location = New System.Drawing.Point(197, 516)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(107, 41)
         Me.btnGrabar.TabIndex = 11
@@ -559,7 +636,7 @@ Partial Class DetallesIncidenciaRechazoMP
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(250, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(16, 216)
+        Me.TabControl1.Location = New System.Drawing.Point(16, 252)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(839, 259)
@@ -710,7 +787,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(320, 481)
+        Me.btnEliminar.Location = New System.Drawing.Point(320, 516)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(107, 41)
         Me.btnEliminar.TabIndex = 15
@@ -720,7 +797,7 @@ Partial Class DetallesIncidenciaRechazoMP
         'btnModifNumINC
         '
         Me.btnModifNumINC.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnModifNumINC.Location = New System.Drawing.Point(443, 481)
+        Me.btnModifNumINC.Location = New System.Drawing.Point(443, 516)
         Me.btnModifNumINC.Name = "btnModifNumINC"
         Me.btnModifNumINC.Size = New System.Drawing.Size(107, 41)
         Me.btnModifNumINC.TabIndex = 15
@@ -731,7 +808,7 @@ Partial Class DetallesIncidenciaRechazoMP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(870, 534)
+        Me.ClientSize = New System.Drawing.Size(870, 564)
         Me.Controls.Add(Me.btnModifNumINC)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.TabControl1)
@@ -831,4 +908,11 @@ Partial Class DetallesIncidenciaRechazoMP
     Friend WithEvents btnModifNumINC As System.Windows.Forms.Button
     Friend WithEvents cmbEmpresaIncidencia As System.Windows.Forms.ComboBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txtNumero As System.Windows.Forms.TextBox
+    Friend WithEvents txtTipo As System.Windows.Forms.TextBox
+    Friend WithEvents txtAnio As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txtDescTipo As System.Windows.Forms.TextBox
 End Class

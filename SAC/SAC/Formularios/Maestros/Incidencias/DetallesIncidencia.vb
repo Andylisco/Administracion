@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports ConsultasVarias
+Imports ConsultasVarias.Clases
 Imports CrystalDecisions.Shared
 Imports Microsoft.Office.Interop.Outlook
 Imports Microsoft.VisualBasic.FileIO
@@ -29,7 +30,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
     End Sub
 
     Private Sub DetallesIncidencia_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
-        txtAnio.Focus()
+        txtTipo.Focus()
     End Sub
 
     Private Sub DetallesIncidencia_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -61,6 +62,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         WAutorizadoEliminar = False
 
         txtFecha.Text = Date.Now.ToString("dd/MM/yyyy")
+        txtAnio.Text = Date.Now.ToString("yyyy")
 
         btnControles.Enabled = True
         btnHojaProduccion.Enabled = True
@@ -428,12 +430,27 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
                 WClaveSAC = OrDefault(WIncid.Item("ClaveSac"), "")
             End If
 
+            '
+            ' Si es un INC nuevo, buscamos proximo numero de Ref y nuevo numero dentro del Periodo.
+            '
             If Val(txtIncidencia.Text) = 0 Then
+
                 WIncid = GetSingle("SELECT Max(Incidencia) As Ultimo FROM CargaIncidencias")
                 If Not IsNothing(WIncid) Then
                     txtIncidencia.Text = OrDefault(WIncid.Item("Ultimo"), 0)
                 End If
                 txtIncidencia.Text = Val(txtIncidencia.Text) + 1
+
+                Dim WProxNumero As DataRow = GetSingle("SELECT Max(Numero) As Ultimo FROM CargaIncidencias WHERE Tipo ='" & txtTipo.Text & "' And Ano = '" & txtAnio.Text & "'")
+
+                txtNumero.Text = ""
+
+                If WProxNumero IsNot Nothing Then
+                    txtNumero.Text = Val(OrDefault(WProxNumero.Item("Ultimo"), 0))
+                End If
+
+                txtNumero.Text = Val(txtNumero.Text) + 1
+
             End If
 
             Dim WEstado As Integer = CType(cmbEstado.SelectedItem, DataRowView).Item("Estado")
@@ -450,10 +467,10 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
             WSqls.Add("DELETE CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
             Dim ZSql = String.Format("INSERT INTO CargaIncidencias " _
-                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos, Empresa, Proveedor, Orden, DescProveedor, EmpresaIncidencia) " _
+                       & "(Incidencia, Renglon, Tipo, Fecha, FechaOrd, Estado, Titulo, Referencia, Producto, Lote, ClaveSac, TipoProd, Posiblesusos, Motivos, Empresa, Proveedor, Orden, DescProveedor, EmpresaIncidencia, TipoINC, Ano, Numero) " _
                        & "VALUES " _
-                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}', '{18}') ", _
-                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, WTipoProd, txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd, "", "", "", cmbEmpresaIncidencia.SelectedIndex)
+                       & " ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}', '{18}', '{19}', '{20}', '{21}') ", _
+                       txtIncidencia.Text, 1, WTipo, txtFecha.Text, ordenaFecha(txtFecha.Text), WEstado, txtTitulo.Text, txtReferencia.Text, txtProducto.Text, txtLotePartida.Text, WClaveSAC, WTipoProd, txtPosiblesUsos.Text, txtMotivos.Text, WEmpresaProd, "", "", "", cmbEmpresaIncidencia.SelectedIndex, txtTipo.Text, txtAnio.Text, txtNumero.Text)
             WSqls.Add(ZSql)
 
             ExecuteNonQueries(WSqls.ToArray)
@@ -522,8 +539,8 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
                 Directory.CreateDirectory(WRuta)
 
-                ConsultasVarias.Clases.Conexion.EmpresaDeTrabajo = "SurfactanSa"
-                ConsultasVarias.Clases.Helper._ExportarReporte(frm, ConsultasVarias.Clases.Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
+                Conexion.EmpresaDeTrabajo = "SurfactanSa"
+                ConsultasVarias.Clases.Helper._ExportarReporte(frm, Enumeraciones.FormatoExportacion.PDF, WNombreArchivo, WRuta)
 
                 If File.Exists(WRuta & WNombreArchivo) Then oMsg.Attachments.Add(WRuta & WNombreArchivo)
 
@@ -593,6 +610,26 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
                 If WProd IsNot Nothing Then txtProducto.Text = OrDefault(WProd.Item("Producto"), "")
             End If
+
+        End If
+
+        If txtAnio.Text.Trim = "" Then
+
+            WControlRetornoError = txtAnio
+
+            MsgBox("No ha indicado el Año al que pertenece el Informe de No Conformidad.", MsgBoxStyle.Exclamation)
+
+            Throw New System.Exception("")
+
+        End If
+
+        If txtTipo.Text.Trim = "" Then
+
+            WControlRetornoError = txtTipo
+
+            MsgBox("No ha indicado el Tipo al que pertenece el Informe de No Conformidad.", MsgBoxStyle.Exclamation)
+
+            Throw New System.Exception("")
 
         End If
 
@@ -1081,7 +1118,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
+    Private Sub btnEliminar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEliminar.Click
 
         If Not WAutorizadoEliminar Then
             If MsgBox("¿Está seguro de querer eliminar este Informe de no Conformidad?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
@@ -1099,12 +1136,12 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub btnModificarNumeracion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificarNumeracion.Click
+    Private Sub btnModificarNumeracion_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificarNumeracion.Click
         Dim WActual As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Incidencia = '" & txtIncidencia.Text & "'")
 
         If WActual Is Nothing Then Exit Sub
 
-        With New ModifNumeracionINC(txtIncidencia.Text)
+        With New ModifNumeracionINC(txtTipo.Text, txtAnio.Text, txtNumero.Text)
             .Show(Me)
         End With
 
@@ -1127,7 +1164,7 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub txtTipo_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTipo.KeyDown
+    Private Sub txtTipo_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtTipo.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
@@ -1166,13 +1203,13 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
         txtNumero.Focus()
     End Sub
 
-    Private Sub txtTipo_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTipo.MouseDoubleClick
+    Private Sub txtTipo_MouseDoubleClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles txtTipo.MouseDoubleClick
         With New AyudaTiposINC
             .ShowDialog(Me)
         End With
     End Sub
 
-    Private Sub txtAnio_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAnio.KeyDown
+    Private Sub txtAnio_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAnio.KeyDown
 
         If e.KeyData = Keys.Enter Then
             If Trim(txtAnio.Text) = "" Then txtAnio.Text = Date.Now.ToString("yyyyy")
@@ -1185,15 +1222,16 @@ Public Class DetallesIncidencia : Implements IAuxiNuevaSACDesdeINC, IAyudaListad
 
     End Sub
 
-    Private Sub txtNumero_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero.KeyDown
+    Private Sub txtNumero_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNumero.KeyDown
 
         If e.KeyData = Keys.Enter Then
 
             If Val(txtNumero.Text) <> 0 Then
 
-                Dim WInc As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE TipoInc = '" & txtTipo.Text & "' AND Numero = '" & txtNumero.Text & "' And Tipo <> '2'")
+                Dim WInc As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Ano = '" & txtAnio.Text & "' And TipoInc = '" & txtTipo.Text & "' AND Numero = '" & txtNumero.Text & "' And Tipo <> '2'")
 
                 If WInc IsNot Nothing Then
+
                     txtIncidencia.Text = WInc.Item("Incidencia")
 
                     txtIncidencia_KeyDown(Nothing, New KeyEventArgs(Keys.Enter))

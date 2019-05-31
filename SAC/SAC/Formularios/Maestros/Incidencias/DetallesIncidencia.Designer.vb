@@ -27,6 +27,9 @@ Partial Class DetallesIncidencia
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtAnio = New System.Windows.Forms.TextBox()
+        Me.txtNumero = New System.Windows.Forms.TextBox()
+        Me.txtTipo = New System.Windows.Forms.TextBox()
         Me.txtLotePartida = New System.Windows.Forms.TextBox()
         Me.btnDesvincularSAC = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -38,10 +41,14 @@ Partial Class DetallesIncidencia
         Me.rbVario = New System.Windows.Forms.RadioButton()
         Me.rbProdTerminado = New System.Windows.Forms.RadioButton()
         Me.rbMatPrima = New System.Windows.Forms.RadioButton()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtReferencia = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.txtIncidencia = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtDescTipo = New System.Windows.Forms.TextBox()
         Me.txtDescProducto = New System.Windows.Forms.TextBox()
         Me.txtTitulo = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -75,13 +82,6 @@ Partial Class DetallesIncidencia
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.btnEliminar = New System.Windows.Forms.Button()
         Me.btnModificarNumeracion = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtTipo = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtNumero = New System.Windows.Forms.TextBox()
-        Me.txtDescTipo = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtAnio = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -165,14 +165,41 @@ Partial Class DetallesIncidencia
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 61)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(818, 154)
+        Me.GroupBox1.Size = New System.Drawing.Size(818, 168)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "DATOS GENERALES"
         '
+        'txtAnio
+        '
+        Me.txtAnio.Location = New System.Drawing.Point(72, 21)
+        Me.txtAnio.MaxLength = 6
+        Me.txtAnio.Name = "txtAnio"
+        Me.txtAnio.Size = New System.Drawing.Size(53, 20)
+        Me.txtAnio.TabIndex = 7
+        Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtNumero
+        '
+        Me.txtNumero.Location = New System.Drawing.Point(499, 21)
+        Me.txtNumero.MaxLength = 6
+        Me.txtNumero.Name = "txtNumero"
+        Me.txtNumero.Size = New System.Drawing.Size(53, 20)
+        Me.txtNumero.TabIndex = 7
+        Me.txtNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTipo
+        '
+        Me.txtTipo.Location = New System.Drawing.Point(171, 21)
+        Me.txtTipo.MaxLength = 6
+        Me.txtTipo.Name = "txtTipo"
+        Me.txtTipo.Size = New System.Drawing.Size(53, 20)
+        Me.txtTipo.TabIndex = 7
+        Me.txtTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'txtLotePartida
         '
-        Me.txtLotePartida.Location = New System.Drawing.Point(444, 73)
+        Me.txtLotePartida.Location = New System.Drawing.Point(444, 79)
         Me.txtLotePartida.MaxLength = 6
         Me.txtLotePartida.Name = "txtLotePartida"
         Me.txtLotePartida.Size = New System.Drawing.Size(53, 20)
@@ -181,7 +208,7 @@ Partial Class DetallesIncidencia
         '
         'btnDesvincularSAC
         '
-        Me.btnDesvincularSAC.Location = New System.Drawing.Point(699, 43)
+        Me.btnDesvincularSAC.Location = New System.Drawing.Point(699, 47)
         Me.btnDesvincularSAC.Name = "btnDesvincularSAC"
         Me.btnDesvincularSAC.Size = New System.Drawing.Size(109, 25)
         Me.btnDesvincularSAC.TabIndex = 12
@@ -190,7 +217,7 @@ Partial Class DetallesIncidencia
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(584, 43)
+        Me.Button3.Location = New System.Drawing.Point(584, 47)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(109, 25)
         Me.Button3.TabIndex = 12
@@ -199,7 +226,7 @@ Partial Class DetallesIncidencia
         '
         'btnSac
         '
-        Me.btnSac.Location = New System.Drawing.Point(469, 43)
+        Me.btnSac.Location = New System.Drawing.Point(469, 47)
         Me.btnSac.Name = "btnSac"
         Me.btnSac.Size = New System.Drawing.Size(109, 25)
         Me.btnSac.TabIndex = 12
@@ -210,7 +237,7 @@ Partial Class DetallesIncidencia
         '
         Me.cmbEmpresaIncidencia.FormattingEnabled = True
         Me.cmbEmpresaIncidencia.Items.AddRange(New Object() {"", "S I", "P I", "S II", "P II", "S III", "S IV", "S V", "P III", "P V", "S VI", "S VII"})
-        Me.cmbEmpresaIncidencia.Location = New System.Drawing.Point(754, 73)
+        Me.cmbEmpresaIncidencia.Location = New System.Drawing.Point(754, 79)
         Me.cmbEmpresaIncidencia.Name = "cmbEmpresaIncidencia"
         Me.cmbEmpresaIncidencia.Size = New System.Drawing.Size(58, 21)
         Me.cmbEmpresaIncidencia.TabIndex = 3
@@ -219,14 +246,14 @@ Partial Class DetallesIncidencia
         '
         Me.cmbEstado.FormattingEnabled = True
         Me.cmbEstado.Items.AddRange(New Object() {"PENDIENTE DE ANÁLISIS", "GENERA SAC", "NO GENERA SAC"})
-        Me.cmbEstado.Location = New System.Drawing.Point(205, 46)
+        Me.cmbEstado.Location = New System.Drawing.Point(205, 49)
         Me.cmbEstado.Name = "cmbEstado"
         Me.cmbEstado.Size = New System.Drawing.Size(164, 21)
         Me.cmbEstado.TabIndex = 3
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(72, 47)
+        Me.txtFecha.Location = New System.Drawing.Point(72, 49)
         Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -237,7 +264,7 @@ Partial Class DetallesIncidencia
         '
         'txtProducto
         '
-        Me.txtProducto.Location = New System.Drawing.Point(291, 73)
+        Me.txtProducto.Location = New System.Drawing.Point(291, 79)
         Me.txtProducto.Mask = ">LL-00000-000"
         Me.txtProducto.Name = "txtProducto"
         Me.txtProducto.PromptChar = Global.Microsoft.VisualBasic.ChrW(32)
@@ -249,7 +276,7 @@ Partial Class DetallesIncidencia
         'rbVario
         '
         Me.rbVario.AutoSize = True
-        Me.rbVario.Location = New System.Drawing.Point(186, 75)
+        Me.rbVario.Location = New System.Drawing.Point(186, 81)
         Me.rbVario.Name = "rbVario"
         Me.rbVario.Size = New System.Drawing.Size(49, 17)
         Me.rbVario.TabIndex = 5
@@ -259,7 +286,7 @@ Partial Class DetallesIncidencia
         'rbProdTerminado
         '
         Me.rbProdTerminado.AutoSize = True
-        Me.rbProdTerminado.Location = New System.Drawing.Point(103, 75)
+        Me.rbProdTerminado.Location = New System.Drawing.Point(103, 81)
         Me.rbProdTerminado.Name = "rbProdTerminado"
         Me.rbProdTerminado.Size = New System.Drawing.Size(80, 17)
         Me.rbProdTerminado.TabIndex = 5
@@ -270,7 +297,7 @@ Partial Class DetallesIncidencia
         '
         Me.rbMatPrima.AutoSize = True
         Me.rbMatPrima.Checked = True
-        Me.rbMatPrima.Location = New System.Drawing.Point(24, 75)
+        Me.rbMatPrima.Location = New System.Drawing.Point(24, 81)
         Me.rbMatPrima.Name = "rbMatPrima"
         Me.rbMatPrima.Size = New System.Drawing.Size(75, 17)
         Me.rbMatPrima.TabIndex = 4
@@ -278,26 +305,53 @@ Partial Class DetallesIncidencia
         Me.rbMatPrima.Text = "Mat. Prima"
         Me.rbMatPrima.UseVisualStyleBackColor = True
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(446, 25)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(47, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Número:"
+        '
         'txtReferencia
         '
-        Me.txtReferencia.Location = New System.Drawing.Point(72, 126)
+        Me.txtReferencia.Location = New System.Drawing.Point(72, 136)
         Me.txtReferencia.MaxLength = 100
         Me.txtReferencia.Name = "txtReferencia"
         Me.txtReferencia.Size = New System.Drawing.Size(740, 20)
         Me.txtReferencia.TabIndex = 9
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(37, 25)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(29, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "Año:"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(29, 51)
+        Me.Label8.Location = New System.Drawing.Point(29, 53)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(40, 13)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "Fecha:"
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(134, 25)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(31, 13)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "Tipo:"
+        '
         'txtIncidencia
         '
-        Me.txtIncidencia.Location = New System.Drawing.Point(754, 10)
+        Me.txtIncidencia.Location = New System.Drawing.Point(754, 21)
         Me.txtIncidencia.Name = "txtIncidencia"
         Me.txtIncidencia.Size = New System.Drawing.Size(53, 20)
         Me.txtIncidencia.TabIndex = 1
@@ -306,16 +360,26 @@ Partial Class DetallesIncidencia
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(376, 77)
+        Me.Label7.Location = New System.Drawing.Point(376, 83)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(69, 13)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Lote/Partida:"
         '
+        'txtDescTipo
+        '
+        Me.txtDescTipo.BackColor = System.Drawing.Color.Cyan
+        Me.txtDescTipo.Location = New System.Drawing.Point(230, 21)
+        Me.txtDescTipo.Name = "txtDescTipo"
+        Me.txtDescTipo.ReadOnly = True
+        Me.txtDescTipo.Size = New System.Drawing.Size(202, 20)
+        Me.txtDescTipo.TabIndex = 1
+        Me.txtDescTipo.TabStop = False
+        '
         'txtDescProducto
         '
         Me.txtDescProducto.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescProducto.Location = New System.Drawing.Point(500, 73)
+        Me.txtDescProducto.Location = New System.Drawing.Point(500, 79)
         Me.txtDescProducto.Name = "txtDescProducto"
         Me.txtDescProducto.ReadOnly = True
         Me.txtDescProducto.Size = New System.Drawing.Size(184, 20)
@@ -324,7 +388,7 @@ Partial Class DetallesIncidencia
         '
         'txtTitulo
         '
-        Me.txtTitulo.Location = New System.Drawing.Point(72, 99)
+        Me.txtTitulo.Location = New System.Drawing.Point(72, 108)
         Me.txtTitulo.MaxLength = 100
         Me.txtTitulo.Name = "txtTitulo"
         Me.txtTitulo.Size = New System.Drawing.Size(740, 20)
@@ -333,7 +397,7 @@ Partial Class DetallesIncidencia
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(690, 77)
+        Me.Label10.Location = New System.Drawing.Point(690, 83)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(62, 13)
         Me.Label10.TabIndex = 0
@@ -342,7 +406,7 @@ Partial Class DetallesIncidencia
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(158, 50)
+        Me.Label9.Location = New System.Drawing.Point(158, 53)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(43, 13)
         Me.Label9.TabIndex = 0
@@ -351,7 +415,7 @@ Partial Class DetallesIncidencia
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(237, 77)
+        Me.Label6.Location = New System.Drawing.Point(237, 83)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(53, 13)
         Me.Label6.TabIndex = 0
@@ -360,16 +424,16 @@ Partial Class DetallesIncidencia
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(706, 14)
+        Me.Label5.Location = New System.Drawing.Point(696, 25)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(45, 13)
+        Me.Label5.Size = New System.Drawing.Size(52, 13)
         Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Inf. Nro:"
+        Me.Label5.Text = "ID Único:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(7, 127)
+        Me.Label4.Location = New System.Drawing.Point(7, 137)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(62, 13)
         Me.Label4.TabIndex = 0
@@ -378,7 +442,7 @@ Partial Class DetallesIncidencia
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(31, 103)
+        Me.Label3.Location = New System.Drawing.Point(31, 112)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(38, 13)
         Me.Label3.TabIndex = 0
@@ -387,7 +451,7 @@ Partial Class DetallesIncidencia
         'btnMovimientos
         '
         Me.btnMovimientos.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovimientos.Location = New System.Drawing.Point(585, 526)
+        Me.btnMovimientos.Location = New System.Drawing.Point(585, 513)
         Me.btnMovimientos.Name = "btnMovimientos"
         Me.btnMovimientos.Size = New System.Drawing.Size(120, 41)
         Me.btnMovimientos.TabIndex = 17
@@ -396,7 +460,7 @@ Partial Class DetallesIncidencia
         '
         'btnHojaProduccion
         '
-        Me.btnHojaProduccion.Location = New System.Drawing.Point(466, 526)
+        Me.btnHojaProduccion.Location = New System.Drawing.Point(466, 513)
         Me.btnHojaProduccion.Name = "btnHojaProduccion"
         Me.btnHojaProduccion.Size = New System.Drawing.Size(115, 41)
         Me.btnHojaProduccion.TabIndex = 16
@@ -405,7 +469,7 @@ Partial Class DetallesIncidencia
         '
         'btnControles
         '
-        Me.btnControles.Location = New System.Drawing.Point(347, 526)
+        Me.btnControles.Location = New System.Drawing.Point(347, 513)
         Me.btnControles.Name = "btnControles"
         Me.btnControles.Size = New System.Drawing.Size(115, 41)
         Me.btnControles.TabIndex = 15
@@ -414,7 +478,7 @@ Partial Class DetallesIncidencia
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(709, 526)
+        Me.btnCerrar.Location = New System.Drawing.Point(709, 513)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(107, 41)
         Me.btnCerrar.TabIndex = 14
@@ -423,7 +487,7 @@ Partial Class DetallesIncidencia
         '
         'btnGrabar
         '
-        Me.btnGrabar.Location = New System.Drawing.Point(14, 526)
+        Me.btnGrabar.Location = New System.Drawing.Point(14, 513)
         Me.btnGrabar.Name = "btnGrabar"
         Me.btnGrabar.Size = New System.Drawing.Size(107, 41)
         Me.btnGrabar.TabIndex = 13
@@ -437,7 +501,7 @@ Partial Class DetallesIncidencia
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.ItemSize = New System.Drawing.Size(265, 30)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 221)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 235)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(804, 272)
@@ -518,7 +582,7 @@ Partial Class DetallesIncidencia
         Me.TabPage3.Location = New System.Drawing.Point(4, 34)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(796, 240)
+        Me.TabPage3.Size = New System.Drawing.Size(796, 234)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "ARCHIVOS"
         '
@@ -549,7 +613,7 @@ Partial Class DetallesIncidencia
         Me.dgvArchivos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FechaArchivo, Me.DescArchivo, Me.Icono, Me.PathArchivo})
         Me.dgvArchivos.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvArchivos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.dgvArchivos.Location = New System.Drawing.Point(3, 11)
+        Me.dgvArchivos.Location = New System.Drawing.Point(3, 5)
         Me.dgvArchivos.Name = "dgvArchivos"
         Me.dgvArchivos.ReadOnly = True
         Me.dgvArchivos.RowHeadersWidth = 15
@@ -609,7 +673,7 @@ Partial Class DetallesIncidencia
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(125, 526)
+        Me.btnEliminar.Location = New System.Drawing.Point(125, 513)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(107, 41)
         Me.btnEliminar.TabIndex = 14
@@ -619,82 +683,18 @@ Partial Class DetallesIncidencia
         'btnModificarNumeracion
         '
         Me.btnModificarNumeracion.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnModificarNumeracion.Location = New System.Drawing.Point(236, 526)
+        Me.btnModificarNumeracion.Location = New System.Drawing.Point(236, 513)
         Me.btnModificarNumeracion.Name = "btnModificarNumeracion"
         Me.btnModificarNumeracion.Size = New System.Drawing.Size(107, 41)
         Me.btnModificarNumeracion.TabIndex = 14
         Me.btnModificarNumeracion.Text = "MODIF. NUMERACIÓN INC"
         Me.btnModificarNumeracion.UseVisualStyleBackColor = True
         '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(134, 22)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(31, 13)
-        Me.Label11.TabIndex = 0
-        Me.Label11.Text = "Tipo:"
-        '
-        'txtTipo
-        '
-        Me.txtTipo.Location = New System.Drawing.Point(171, 18)
-        Me.txtTipo.MaxLength = 6
-        Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(53, 20)
-        Me.txtTipo.TabIndex = 7
-        Me.txtTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(37, 22)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(29, 13)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "Año:"
-        '
-        'txtNumero
-        '
-        Me.txtNumero.Location = New System.Drawing.Point(499, 18)
-        Me.txtNumero.MaxLength = 6
-        Me.txtNumero.Name = "txtNumero"
-        Me.txtNumero.Size = New System.Drawing.Size(53, 20)
-        Me.txtNumero.TabIndex = 7
-        Me.txtNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtDescTipo
-        '
-        Me.txtDescTipo.BackColor = System.Drawing.Color.Cyan
-        Me.txtDescTipo.Location = New System.Drawing.Point(230, 18)
-        Me.txtDescTipo.Name = "txtDescTipo"
-        Me.txtDescTipo.ReadOnly = True
-        Me.txtDescTipo.Size = New System.Drawing.Size(202, 20)
-        Me.txtDescTipo.TabIndex = 1
-        Me.txtDescTipo.TabStop = False
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(446, 22)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(47, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Número:"
-        '
-        'txtAnio
-        '
-        Me.txtAnio.Location = New System.Drawing.Point(72, 18)
-        Me.txtAnio.MaxLength = 6
-        Me.txtAnio.Name = "txtAnio"
-        Me.txtAnio.Size = New System.Drawing.Size(53, 20)
-        Me.txtAnio.TabIndex = 7
-        Me.txtAnio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'DetallesIncidencia
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(831, 572)
+        Me.ClientSize = New System.Drawing.Size(831, 557)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMovimientos)
         Me.Controls.Add(Me.btnHojaProduccion)

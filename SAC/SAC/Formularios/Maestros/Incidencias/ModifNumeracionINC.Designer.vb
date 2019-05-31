@@ -74,7 +74,7 @@ Partial Class ModifNumeracionINC
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(21, 75)
+        Me.Label3.Location = New System.Drawing.Point(38, 66)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(128, 13)
         Me.Label3.TabIndex = 5
@@ -83,7 +83,7 @@ Partial Class ModifNumeracionINC
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(26, 103)
+        Me.Label4.Location = New System.Drawing.Point(43, 94)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(123, 13)
         Me.Label4.TabIndex = 5
@@ -91,7 +91,7 @@ Partial Class ModifNumeracionINC
         '
         'txtNumActual
         '
-        Me.txtNumActual.Location = New System.Drawing.Point(195, 71)
+        Me.txtNumActual.Location = New System.Drawing.Point(212, 62)
         Me.txtNumActual.Name = "txtNumActual"
         Me.txtNumActual.ReadOnly = True
         Me.txtNumActual.Size = New System.Drawing.Size(100, 20)
@@ -99,14 +99,14 @@ Partial Class ModifNumeracionINC
         '
         'txtNuevoNum
         '
-        Me.txtNuevoNum.Location = New System.Drawing.Point(195, 99)
+        Me.txtNuevoNum.Location = New System.Drawing.Point(212, 90)
         Me.txtNuevoNum.Name = "txtNuevoNum"
         Me.txtNuevoNum.Size = New System.Drawing.Size(100, 20)
         Me.txtNuevoNum.TabIndex = 6
         '
         'btnModif
         '
-        Me.btnModif.Location = New System.Drawing.Point(54, 141)
+        Me.btnModif.Location = New System.Drawing.Point(71, 132)
         Me.btnModif.Name = "btnModif"
         Me.btnModif.Size = New System.Drawing.Size(116, 35)
         Me.btnModif.TabIndex = 7
@@ -115,7 +115,7 @@ Partial Class ModifNumeracionINC
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(184, 141)
+        Me.btnCancelar.Location = New System.Drawing.Point(201, 132)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(116, 35)
         Me.btnCancelar.TabIndex = 7
@@ -126,7 +126,7 @@ Partial Class ModifNumeracionINC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(355, 195)
+        Me.ClientSize = New System.Drawing.Size(355, 180)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnModif)
         Me.Controls.Add(Me.txtNuevoNum)

@@ -5,7 +5,10 @@ Public Class ModifNumeracionINC : Implements IIngresoClaveSeguridad
     Private WNumActual As String
     Private WAutorizado As Boolean = False
 
-    Sub New(ByVal Num As String)
+    Private WTipo As String = ""
+    Private WAnio As String = ""
+
+    Sub New(ByVal TipoINC As String, ByVal Anio As String, ByVal Num As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -13,6 +16,9 @@ Public Class ModifNumeracionINC : Implements IIngresoClaveSeguridad
         ' Add any initialization after the InitializeComponent() call.
 
         txtNumActual.Text = Trim(Num)
+
+        WTipo = TipoINC
+        WAnio = Anio
 
     End Sub
 
@@ -42,16 +48,17 @@ Public Class ModifNumeracionINC : Implements IIngresoClaveSeguridad
     End Sub
 
     Private Sub btnModif_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModif.Click
+
         If Val(txtNumActual.Text) = 0 Or Val(txtNuevoNum.Text) = 0 Then Exit Sub
 
-        Dim WActual As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Incidencia = '" & txtNumActual.Text & "'")
+        Dim WActual As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Numero = '" & txtNumActual.Text & "' And Tipo = '" & WTipo & "' And Ano = '" & WAnio & "'")
 
         If WActual Is Nothing Then
             MsgBox("No se encuentra el Informe de No Conformidad al que se quiere modificar la numeración.", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
 
-        Dim WNuevo As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Incidencia = '" & txtNuevoNum.Text & "'")
+        Dim WNuevo As DataRow = GetSingle("SELECT Incidencia FROM CargaIncidencias WHERE Incidencia = '" & txtNuevoNum.Text & "' And Tipo = '" & WTipo & "' And Ano = '" & WAnio & "'")
 
         If WNuevo IsNot Nothing Then
             MsgBox("Ya existe un Informe de no Conformidad con el número que indicó en 'NUEVA NUMERACIÓN'.", MsgBoxStyle.Exclamation)
@@ -67,7 +74,7 @@ Public Class ModifNumeracionINC : Implements IIngresoClaveSeguridad
             Exit Sub
         End If
 
-        ExecuteNonQueries("UPDATE CargaIncidencias SET Incidencia = '" & txtNuevoNum.Text & "' WHERE Incidencia = '" & txtNumActual.Text & "'")
+        ExecuteNonQueries("UPDATE CargaIncidencias SET Numero = '" & txtNuevoNum.Text & "' WHERE Numero = '" & txtNumActual.Text & "' And Tipo = '" & WTipo & "' And Ano = '" & WAnio & "'")
 
         Dim WOwner As IModifNumeracionINC = TryCast(Owner, IModifNumeracionINC)
 

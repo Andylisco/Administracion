@@ -1594,7 +1594,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                         If MsgBox("¿Desea enviar el aviso al Responsable de Investigación?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                            _EnviarEmail(WResp.Item("Email"), "Carga de " & lblDescTipo.Text & +" Nro.:" + txtNumero.Text + " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+                            _EnviarEmail(WResp.Item("Email"), "Carga de " & lblDescTipo.Text & " Nro.:" & txtNumero.Text & " - " & Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
 
                         End If
 
@@ -1604,7 +1604,7 @@ Public Class NuevoSac : Implements INuevaAccion, IAyudaContenedor, IAyudaCentroS
 
                 If MsgBox("¿Desea enviar el aviso al Responsable de Calidad?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar", "Carga de " & lblDescTipo.Text & +" Nro.:" + txtNumero.Text + " - " + Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
+                    _EnviarEmail("ebiglieri@surfactan.com.ar; calidad@surfactan.com.ar; wbarosio@surfactan.com.ar; calidad2@surfactan.com.ar; isocalidad@surfactan.com.ar;juanfs@surfactan.com.ar; lsantos@surfactan.com.ar; drodriguez@surfactan.com.ar", "Carga de " & lblDescTipo.Text & " Nro.:" & txtNumero.Text & " - " & Microsoft.VisualBasic.Left(txtReferencia.Text, 50), "Se inició una " & lblDescTipo.Text.Trim & " : " & txtAnio.Text & "/" & txtNumero.Text & " para determinar CAUSAS y Acciones Correctivas correspondientes. Referencia : " & txtReferencia.Text.Trim & " Título : " & txtTitulo.Text.Trim)
 
                 End If
 

@@ -344,6 +344,8 @@ Partial Public Class DetallesIndiceGral
         
         Private columnidTipo As Global.System.Data.DataColumn
         
+        Private columnImpreINC As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -484,6 +486,14 @@ Partial Public Class DetallesIndiceGral
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ImpreINCColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnImpreINC
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -520,9 +530,9 @@ Partial Public Class DetallesIndiceGral
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddDetallesRow(ByVal Clave As String, ByVal Tipo As String, ByVal Año As Short, ByVal Nro As Short, ByVal Fecha As String, ByVal Estado As String, ByVal Titulo As String, ByVal Referencia As String, ByVal Centro As String, ByVal Origen As String, ByVal Emisor As String, ByVal Responsable As String, ByVal idTipo As Integer) As DetallesRow
+        Public Overloads Function AddDetallesRow(ByVal Clave As String, ByVal Tipo As String, ByVal Año As Short, ByVal Nro As Short, ByVal Fecha As String, ByVal Estado As String, ByVal Titulo As String, ByVal Referencia As String, ByVal Centro As String, ByVal Origen As String, ByVal Emisor As String, ByVal Responsable As String, ByVal idTipo As Integer, ByVal ImpreINC As String) As DetallesRow
             Dim rowDetallesRow As DetallesRow = CType(Me.NewRow,DetallesRow)
-            Dim columnValuesArray() As Object = New Object() {Clave, Tipo, Año, Nro, Fecha, Estado, Titulo, Referencia, Centro, Origen, Emisor, Responsable, idTipo}
+            Dim columnValuesArray() As Object = New Object() {Clave, Tipo, Año, Nro, Fecha, Estado, Titulo, Referencia, Centro, Origen, Emisor, Responsable, idTipo, ImpreINC}
             rowDetallesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDetallesRow)
             Return rowDetallesRow
@@ -558,6 +568,7 @@ Partial Public Class DetallesIndiceGral
             Me.columnEmisor = MyBase.Columns("Emisor")
             Me.columnResponsable = MyBase.Columns("Responsable")
             Me.columnidTipo = MyBase.Columns("idTipo")
+            Me.columnImpreINC = MyBase.Columns("ImpreINC")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -589,6 +600,8 @@ Partial Public Class DetallesIndiceGral
             MyBase.Columns.Add(Me.columnResponsable)
             Me.columnidTipo = New Global.System.Data.DataColumn("idTipo", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnidTipo)
+            Me.columnImpreINC = New Global.System.Data.DataColumn("ImpreINC", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnImpreINC)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1260,6 +1273,21 @@ Partial Public Class DetallesIndiceGral
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ImpreINC() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDetalles.ImpreINCColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ImpreINC' in table 'Detalles' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDetalles.ImpreINCColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsClaveNull() As Boolean
             Return Me.IsNull(Me.tableDetalles.ClaveColumn)
         End Function
@@ -1412,6 +1440,18 @@ Partial Public Class DetallesIndiceGral
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetidTipoNull()
             Me(Me.tableDetalles.idTipoColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsImpreINCNull() As Boolean
+            Return Me.IsNull(Me.tableDetalles.ImpreINCColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetImpreINCNull()
+            Me(Me.tableDetalles.ImpreINCColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
