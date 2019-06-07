@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Reflection
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 
@@ -9,6 +10,13 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
     End Sub
 
     Private Sub ListadoIncidencias_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        EnableDoubleBuffered(dgvIncidencias)
+
+        For Each c As datagridviewcolumn In dgvIncidencias.Columns
+            c.SortMode = DataGridViewColumnSortMode.NotSortable
+        Next
+
         txtDesdeFecha.Text = ""
         txtHastaFecha.Text = ""
         txtDesdeAño.Text = Date.Now.ToString("yyyy")
@@ -518,6 +526,17 @@ Public Class ListadoIncidencias : Implements INuevaIncidencia, ISeleccionNuevaIn
             End Select
 
         End With
+    End Sub
+
+    Public Sub EnableDoubleBuffered(ByRef dgv As DataGridView)
+
+        Dim dgvType As Type = dgv.[GetType]()
+
+        Dim pi As PropertyInfo = dgvType.GetProperty("DoubleBuffered", _
+                                                     BindingFlags.Instance Or BindingFlags.NonPublic)
+
+        pi.SetValue(dgv, True, Nothing)
+
     End Sub
 
 End Class

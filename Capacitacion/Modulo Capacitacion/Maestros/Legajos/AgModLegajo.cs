@@ -624,6 +624,7 @@ namespace Modulo_Capacitacion.Maestros.Legajos
         {
             
             LegajoVer.Codigo = LegajoViejo.Codigo;
+            
             LegajoVer.Version = LegajoViejo.Version;
             LegajoVer.Descripcion = LegajoViejo.Descripcion;
             LegajoVer.FIngreso = LegajoViejo.FIngreso;
@@ -660,6 +661,8 @@ namespace Modulo_Capacitacion.Maestros.Legajos
             
             //LegajoVer.Temas = new Tema();
             LegajoVer.Temas = LegajoViejo.Temas;
+
+            LegajoVer.DNI = LegajoViejo.DNI;
 
         }
 

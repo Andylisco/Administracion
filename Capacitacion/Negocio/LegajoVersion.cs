@@ -38,6 +38,7 @@ namespace Negocio
         public string EstaVIII;
         public string EstaIX;
         public string EstaX;
+        public string DNI;
         public List<Tema> Temas { get; set; }
 
 
